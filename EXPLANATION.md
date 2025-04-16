@@ -5,6 +5,7 @@
 
 The following is the folder structure for this project:
 
+
 ```plaintext
 project-root/
 ├── client/                    # Frontend application
