@@ -59,10 +59,3 @@ Each service (`yolo-client`, `yolo-backend`, and `app-ip-mongo`) is connected to
 
 In the Docker Compose file, the `volumes` section is used to persist data and ensure that it's retained even if the container is removed or recreated. Here's a detailed breakdown:
 
----
-
-### **Volume Definition**
-```yaml
-volumes:
-  app-mongo-data:
-    driver: local
