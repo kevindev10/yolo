@@ -71,7 +71,7 @@ This setup ensures that your database remains functional, even if the container 
 
 ---
 
-# Git Workflow 
+## Git Workflow 
 
 - **Forked and cloned** the repository locally.
 
@@ -89,3 +89,5 @@ This setup ensures that your database remains functional, even if the container 
 ```
 
 
+## DockerHub Screen Shot
+![DockerHub screenshot of the basic microservices app images](./images/DockerHub-Screenshot.png)
