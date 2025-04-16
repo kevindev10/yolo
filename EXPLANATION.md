@@ -33,7 +33,6 @@ project-root/
 
 
 
-
 ## Choice of the Base Image
 
 - **Why `node:14` Specifically?**  
