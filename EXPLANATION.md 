@@ -70,4 +70,3 @@ In the Docker Compose file, the `volumes` section is used to persist data and en
 volumes:
   app-mongo-data:
     driver: local
-
