@@ -1,5 +1,38 @@
-```markdown
 # A BASIC MICRO SERVICE WEB APP WITH NODE.JS, MONGODB, AND DOCKER COMPOSE
+
+
+
+## Core Project Structure
+
+The following is the folder structure for this project:
+
+```plaintext
+project-root/
+├── client/                    # Frontend application
+│   ├── src/                   # Source code (React components, styles, etc.)
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── assets/            # Images, icons, or other static assets
+│   │   └── App.js
+│   ├── public/                # Static files (HTML template, favicon, etc.)
+│   ├── package.json           # Frontend dependencies
+│   └── Dockerfile             # Dockerfile for client container
+├── backend/                   # Backend application
+│   ├── routes/                # Express routes for handling APIs
+│   ├── models/                # MongoDB schemas and models
+│   ├── controllers/           # Business logic
+│   ├── server.js              # Backend entry point
+│   ├── package.json           # Backend dependencies
+│   └── Dockerfile             # Dockerfile for backend container
+├── db/                        # MongoDB initialization scripts (optional)
+│   └── init-db.js
+├── docker-compose.yml          # Orchestration of all services
+├── explanation.md              # Project explanation (documentation)
+├── README.md                   # Project overview and setup instructions
+└── .gitignore                  # Files to exclude from Git tracking
+
+
+
 
 ## Choice of the Base Image
 
