@@ -3,6 +3,11 @@
 
 ## Choice of the base image
 
+- **Why `node:14` Specifically?**  
+  Version 14 of Node.js is stable and widely supported, offering reliability for most applications. It's also lightweight and optimized for performance, balancing compatibility and resource usage.
+
+- **Why Alpine?**  
+  Alpine Linux is a super lightweight image, designed for minimal resource consumption. It reduces the final image size significantly, which is especially useful in production environments where large images can slow down deployment and increase storage costs.
 
 
 ## Dockerfile directives
