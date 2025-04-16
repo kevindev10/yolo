@@ -11,6 +11,30 @@
 
 
 ## Dockerfile directives
+### **1. `FROM`**
+- **Purpose:** Specifies the base image for the container.
+
+### **2. `WORKDIR`**
+- **Purpose:** Sets the working directory inside the container. Any subsequent file operations (e.g., `COPY`, `RUN`) will happen relative to this directory.
+
+### **3. `COPY`**
+- **Purpose:** Copies files from the host machine into the container.
+
+### **4. `RUN`**
+- **Purpose:** Executes commands in the container's shell during build time (not runtime).
+
+### **5. `EXPOSE`**
+- **Purpose:** Documents which port the application listens on. This helps in configuring the container's networking but does not actually publish the port.
+
+
+### **6. `CMD`**
+- **Purpose:** Specifies the default command to run when the container starts. Unlike `RUN`, it executes during runtime.
+
+---
+
+This Dockerfile demonstrates a clean, modular design, perfect for minimizing your image size while maintaining functionality.
+
+
 
 
 
