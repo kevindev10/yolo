@@ -1,6 +1,3 @@
-Here’s your project description formatted as `README.md` for GitHub:
-
-```markdown
 # A Basic Microservice Web App with Node.js, MongoDB, and Docker Compose
 
 ## Overview
