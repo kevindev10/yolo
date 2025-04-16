@@ -32,10 +32,6 @@
 
 ---
 
-This Dockerfile demonstrates a clean, modular design, perfect for minimizing your image size while maintaining functionality.
-
----
-
 ## Docker-compose Networking
 
 Networking in the Docker Compose file is key to enabling smooth communication among the microservices. Here's a breakdown:
@@ -61,7 +57,7 @@ Each service (`yolo-client`, `yolo-backend`, and `app-ip-mongo`) is connected to
 
 ## Docker-compose Volume
 
-In the Docker Compose file, the `volumes` section is used to persist data and ensure that it's retained even if the container is removed or recreated. Here's a detailed breakdown of the volume configuration:
+In the Docker Compose file, the `volumes` section is used to persist data and ensure that it's retained even if the container is removed or recreated. Here's a detailed breakdown:
 
 ---
 
