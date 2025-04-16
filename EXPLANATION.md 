@@ -10,6 +10,7 @@
   Alpine Linux is a super lightweight image, designed for minimal resource consumption. It reduces the final image size significantly, which is especially useful in production environments where large images can slow down deployment and increase storage costs.
 
 
+
 ## Dockerfile directives
 
 
