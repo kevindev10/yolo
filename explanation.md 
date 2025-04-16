@@ -1,3 +1,4 @@
+```markdown
 # A BASIC MICRO SERVICE WEB APP WITH NODE.JS, MONGODB, AND DOCKER COMPOSE
 
 ## Choice of the Base Image
@@ -57,5 +58,34 @@ Each service (`yolo-client`, `yolo-backend`, and `app-ip-mongo`) is connected to
 
 ## Docker-compose Volume
 
-In the Docker Compose file, the `volumes` section is used to persist data and ensure that it's retained even if the container is removed or recreated. Here's a detailed breakdown:
+In the Docker Compose file, the `volumes` section is used to persist data and ensure that it's retained even if the container is removed or recreated.
+
+### **Workflow Summary**
+1. **Volume Initialization:** Docker automatically creates the `app-mongo-data` volume when the Compose file is executed (`docker-compose up`).
+2. **Data Management:** MongoDB writes and reads data from `/data/db`, which is backed by the `app-mongo-data` volume.
+3. **Persistence on Host:** Data in the volume persists in the host system's Docker-managed location, ensuring reliability during container lifecycle changes.
+
+---
+
+This setup ensures that your database remains functional, even if the container is replaced or updated. 
+
+---
+
+# Git Workflow 
+
+- **Forked and cloned** the repository locally.
+
+- **Ran the application locally** to ensure it works successfully.
+
+- **Merged** the `revert-25-master` branch into the `master` branch.
+
+- **Used semantic versioning** for the Docker images with each commit.
+
+- **Built Docker images** for the microservices and pushed them to DockerHub using proper naming conventions.
+
+- **Tested the application locally** using Docker Compose, verifying that microservices were properly networked.
+
+- **Debugged MongoDB connection issues**, ensuring database functionality and persistence.
+```
+
 
