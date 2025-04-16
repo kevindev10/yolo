@@ -40,9 +40,63 @@ This Dockerfile demonstrates a clean, modular design, perfect for minimizing you
 
 ## Docker-compose Networking
 
+Networking in the Docker Compose file is key to enabling smooth communication among the microservices. Here's a breakdown:
+
+### **Custom Bridge Network (`app-net`)**
+The file defines a network named `app-net`, with the following characteristics:
+- **Name:** The network is explicitly named `app-net` to identify it easily across containers and configurations.
+- **Driver:** A `bridge` driver is used, which is the default network driver in Docker. It ensures containers connected to the network can communicate directly using container names as hostnames.
+- **Attachable:** The `attachable: true` directive allows external containers to dynamically join the network if needed, enabling flexibility in network expansion.
+- **IPAM (IP Address Management):**
+  - **Subnet:** The custom subnet `172.20.0.0/16` provides a range of IP addresses for containers within the network.
+  - **IP Range:** Specifies `172.20.0.0/16` for allocating IPs. This ensures controlled and predictable IP assignment for containers.
+
+---
+
+### **How Services Use the Network**
+Each service (`yolo-client`, `yolo-backend`, and `app-ip-mongo`) is connected to the `app-net` network:
+- Containers on the same network can communicate with each other by using their container names as hostnames.
+  - For example, the backend (`yolo-backend`) can connect to the MongoDB service (`app-ip-mongo`) by addressing it as `app-mongo` instead of needing an IP address.
+- Networking makes interdependencies seamless, such as when `yolo-client` depends on `yolo-backend`.
+
+---
+
 
 
 ## Docker-compose volume
+
+In the Docker Compose file, the `volumes` section is used to persist data and ensure that it's retained even if the container is removed or recreated. Here's a detailed breakdown of the volume configuration:
+
+---
+
+### **Volume Definition**
+```yaml
+volumes:
+  app-mongo-data:
+    driver: local
+```
+
+#### **Explanation:**
+- **`app-mongo-data`:** This named volume is defined in the `volumes` section. It will store MongoDB's data outside the container's ephemeral file system.
+- **`driver: local`:** The `local` driver is the default volume driver, which stores data on the host system in a location managed by Docker. This ensures portability and persistence.
+
+---
+
+### **Volume Usage**
+The volume is used by the `app-ip-mongo` service:
+```yaml
+volumes:
+  - type: volume
+    source: app-mongo-data
+    target: /data/db
+```
+
+#### **Explanation of Directives:**
+- **`type: volume`:** Indicates that the storage will be handled via a Docker volume (as opposed to a bind mount).
+- **`source: app-mongo-data`:** Links the named volume (`app-mongo-data`) that was defined earlier.
+- **`target: /data/db`:** Mounts the volume inside the container at `/data/db`, which is the default directory MongoDB uses to store its database files.
+
+---
 
 
 
