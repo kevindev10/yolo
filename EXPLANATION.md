@@ -11,7 +11,7 @@ project-root/
 │   ├── src/                   # Source code (React components, styles, etc.)
 │   │   ├── components/
 │   │   ├── pages/
-│   │   ├── assets/            # Images, icons, or other static assets
+│   │   ├── images/            # Images, icons, or other static assets
 │   │   └── App.js
 │   ├── public/                # Static files (HTML template, favicon, etc.)
 │   ├── package.json           # Frontend dependencies
@@ -19,7 +19,6 @@ project-root/
 ├── backend/                   # Backend application
 │   ├── routes/                # Express routes for handling APIs
 │   ├── models/                # MongoDB schemas and models
-│   ├── controllers/           # Business logic
 │   ├── server.js              # Backend entry point
 │   ├── package.json           # Backend dependencies
 │   └── Dockerfile             # Dockerfile for backend container
