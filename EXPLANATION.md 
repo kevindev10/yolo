@@ -1,16 +1,17 @@
 # A BASIC MICRO SERVICE WEB APP WITH NODE.JS, MONGODB, AND DOCKER COMPOSE
 
+## Choice of the Base Image
 
-## Choice of the base image
 - **Why `node:14` Specifically?**  
   Version 14 of Node.js is stable and widely supported, offering reliability for most applications. It's also lightweight and optimized for performance, balancing compatibility and resource usage.
 
 - **Why Alpine?**  
   Alpine Linux is a super lightweight image, designed for minimal resource consumption. It reduces the final image size significantly, which is especially useful in production environments where large images can slow down deployment and increase storage costs.
 
+---
 
+## Dockerfile Directives
 
-## Dockerfile directives
 ### **1. `FROM`**
 - **Purpose:** Specifies the base image for the container.
 
@@ -26,7 +27,6 @@
 ### **5. `EXPOSE`**
 - **Purpose:** Documents which port the application listens on. This helps in configuring the container's networking but does not actually publish the port.
 
-
 ### **6. `CMD`**
 - **Purpose:** Specifies the default command to run when the container starts. Unlike `RUN`, it executes during runtime.
 
@@ -34,9 +34,7 @@
 
 This Dockerfile demonstrates a clean, modular design, perfect for minimizing your image size while maintaining functionality.
 
-
-
-
+---
 
 ## Docker-compose Networking
 
@@ -61,9 +59,7 @@ Each service (`yolo-client`, `yolo-backend`, and `app-ip-mongo`) is connected to
 
 ---
 
-
-
-## Docker-compose volume
+## Docker-compose Volume
 
 In the Docker Compose file, the `volumes` section is used to persist data and ensure that it's retained even if the container is removed or recreated. Here's a detailed breakdown of the volume configuration:
 
@@ -74,37 +70,4 @@ In the Docker Compose file, the `volumes` section is used to persist data and en
 volumes:
   app-mongo-data:
     driver: local
-```
-
-#### **Explanation:**
-- **`app-mongo-data`:** This named volume is defined in the `volumes` section. It will store MongoDB's data outside the container's ephemeral file system.
-- **`driver: local`:** The `local` driver is the default volume driver, which stores data on the host system in a location managed by Docker. This ensures portability and persistence.
-
----
-
-### **Volume Usage**
-The volume is used by the `app-ip-mongo` service:
-```yaml
-volumes:
-  - type: volume
-    source: app-mongo-data
-    target: /data/db
-```
-
-#### **Explanation of Directives:**
-- **`type: volume`:** Indicates that the storage will be handled via a Docker volume (as opposed to a bind mount).
-- **`source: app-mongo-data`:** Links the named volume (`app-mongo-data`) that was defined earlier.
-- **`target: /data/db`:** Mounts the volume inside the container at `/data/db`, which is the default directory MongoDB uses to store its database files.
-
----
-
-
-
-## Git workflow
-
-
-
-## Screenshot of your deployed image on DockerHub
-
-
 
