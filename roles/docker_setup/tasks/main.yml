@@ -1,2 +1,22 @@
 ---
 # tasks file for roles/docker_setup
+
+# Purpose: Ensures Docker is installed and running inside the VM.
+# Scope: Installs Docker, enables the service, and verifies functionality.
+
+- name: Install Docker
+  apt:
+    name: docker.io
+    state: present
+
+- name: Enable Docker service
+  systemd:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Add vagrant user to Docker group
+  user:
+    name: vagrant
+    groups: docker
+    append: yes
