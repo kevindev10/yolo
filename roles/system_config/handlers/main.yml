@@ -1,0 +1,8 @@
+# This ensures that if Docker installation is modified, the service restarts automatically.
+
+---
+# handlers file for roles/system_config
+- name: Restart Docker
+  systemd:
+    name: docker
+    state: restarted
