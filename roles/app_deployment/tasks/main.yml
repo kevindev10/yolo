@@ -1,2 +1,26 @@
 ---
 # tasks file for roles/app_deployment
+# Purpose: Automatically deploy the application inside the VM.
+# Scope: Clones the repo, sets up the environment, and starts services.
+
+- name: Ensure destination directory exists
+  file:
+    path: /home/vagrant/app
+    state: directory
+
+- name: Clone application repository
+  git:
+    repo: "https://github.com/kevindev10/yolo"
+    dest: "/home/vagrant/app"
+    clone: yes
+    update: yes
+
+- name: Ensure Docker Compose is installed
+  apt:
+    name: docker-compose
+    state: present
+
+- name: Start application containers
+  command: docker-compose up -d
+  args:
+    chdir: "/home/vagrant/app"
