@@ -1,8 +1,35 @@
 
-# Purpose: Ensure essential system packages are installed and updated. 
-# Scope: Updates package lists, installs core utilities (Git, Curl, Docker), and prepares the environment for automation.
+# # Purpose: Ensure essential system packages are installed and updated. 
+# # Scope: Updates package lists, installs core utilities (Git, Curl, Docker), and prepares the environment for automation.
 
----
+# ---
+# # tasks file for roles/system_config
+# - name: Update package list
+#   apt:
+#     update_cache: yes
+
+# - name: Install essential packages
+#   apt:
+#     name:
+#       - git
+#       - curl
+#       - docker.io
+#     state: present
+
+# - name: Enable Docker service
+#   systemd:
+#     name: docker
+#     state: started
+#     enabled: true
+
+
+
+
+# Purpose: Ensure essential system packages are installed and updated. 
+# Scope: Updates package lists, installs core utilities (Git, Curl, Docker), prepares the environment for automation, and clones the application repository.
+
+
+
 # tasks file for roles/system_config
 - name: Update package list
   apt:
@@ -21,3 +48,15 @@
     name: docker
     state: started
     enabled: true
+
+- name: Ensure destination directory exists
+  file:
+    path: /home/vagrant/app
+    state: directory
+
+- name: Clone application repository
+  git:
+    repo: "https://github.com/kevindev10/yolo"
+    dest: "/home/vagrant/app"
+    clone: yes
+    update: yes

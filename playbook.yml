@@ -1,7 +1,19 @@
+# - name: Full Automated Setup
+#   hosts: all
+#   become: true
+#   roles:
+#     - system_config
+#     - docker_setup
+#     - app_deployment
+
+
+
 - name: Full Automated Setup
   hosts: all
   become: true
   roles:
-    - system_config
-    - docker_setup
-    - app_deployment
+    - system_config    # Sets up the environment and clones the repository
+    - docker_setup     # Ensures Docker is installed and configured
+    - frontend_setup   # Deploys the frontend container
+    - backend_setup    # Deploys the backend container
+    - mongo_setup      # Deploys the MongoDB container

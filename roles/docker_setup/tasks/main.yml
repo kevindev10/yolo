@@ -20,3 +20,21 @@
     name: vagrant
     groups: docker
     append: yes
+
+
+
+
+- name: Verify Docker installation
+  command: docker --version
+  register: docker_version_output
+
+
+- name: Display Docker version
+  debug:
+    msg: "Docker installed successfully: {{ docker_version_output.stdout }}"
+
+
+- name: Install Docker Compose
+  apt:
+    name: docker-compose
+    state: present

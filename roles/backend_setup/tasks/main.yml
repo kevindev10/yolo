@@ -1,0 +1,11 @@
+---
+# tasks file for backend_setup
+# Backend Setup Role  
+# Purpose: Deploys the backend container from the shared repository  
+# Scope: Ensures the backend container starts properly using Docker Compose  
+
+
+- name: Start backend container
+  command: docker-compose up -d yolo-backend
+  args:
+    chdir: "/home/vagrant/app"

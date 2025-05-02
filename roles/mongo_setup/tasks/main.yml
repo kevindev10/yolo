@@ -1,0 +1,11 @@
+---
+# tasks file for mongo_setup
+# MongoDB Setup Role  
+# Purpose: Deploys the MongoDB container from the shared repository  
+# Scope: Ensures MongoDB container runs properly  
+
+
+- name: Start MongoDB container
+  command: docker-compose up -d app-ip-mongo
+  args:
+    chdir: "/home/vagrant/app"

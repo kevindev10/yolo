@@ -76,6 +76,14 @@ Vagrant.configure("2") do |config|
   # SHELL
 
   config.vm.network "private_network", ip: "192.168.56.10"
+  
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
+
+  config.vm.provision "shell", inline: <<-SHELL
+    echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> /etc/environment
+  SHELL
+
+
 
    config.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"

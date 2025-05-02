@@ -1,0 +1,17 @@
+---
+# tasks file for frontend_setup
+# Frontend Setup Role  
+# Purpose: Deploys the frontend container from the shared repository  
+# Scope: Ensures the frontend container starts properly using Docker Compose  
+
+
+- name: Start frontend container
+  command: docker-compose up -d yolo-client
+  args:
+    chdir: "/home/vagrant/app"
+
+- name: Ensure OpenSSL legacy provider is enabled
+  lineinfile:
+    path: /etc/environment
+    line: 'NODE_OPTIONS=--openssl-legacy-provider'
+    create: yes

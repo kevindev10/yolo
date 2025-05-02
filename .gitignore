@@ -1,3 +1,4 @@
+.env
 app-mongo-data
 app-mongo-data/
 vars.yml

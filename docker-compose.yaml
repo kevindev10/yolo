@@ -38,6 +38,7 @@ services:
       - app-ip-mongo
     networks:
       - app-net
+      - default
 
   #Creates the database microservice
   app-ip-mongo:
