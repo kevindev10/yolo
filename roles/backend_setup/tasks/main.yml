@@ -4,6 +4,14 @@
 # Purpose: Deploys the backend container from the shared repository  
 # Scope: Ensures the backend container starts properly using Docker Compose  
 
+- name: Create .env file in backend folder
+  copy:
+    dest: "/home/vagrant/app/backend/.env"
+    content: |
+      MONGODB_URI="mongodb+srv://kevin1345:kevin1345@cluster0.7ksi9cx.mongodb.net/yolomy?retryWrites=true&w=majority&appName=Cluster0"
+    mode: "0644"
+
+
 
 - name: Start backend container
   command: docker-compose up -d yolo-backend
