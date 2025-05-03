@@ -1,11 +1,3 @@
-# - name: Full Automated Setup
-#   hosts: all
-#   become: true
-#   roles:
-#     - system_config
-#     - docker_setup
-#     - app_deployment
-
 
 
 - name: Full Automated Setup
