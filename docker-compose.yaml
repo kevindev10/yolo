@@ -17,6 +17,7 @@ services:
     container_name: yolo-client
     stdin_open: true
     tty: true
+    restart: always
     ports:
       - "3000:3000"
     depends_on: 
@@ -46,6 +47,7 @@ services:
   app-ip-mongo:
     image: mongo
     container_name: app-mongo
+    restart: always
     ports:
       - "27017:27017"
     networks:
