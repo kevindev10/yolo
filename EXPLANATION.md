@@ -1,3 +1,4 @@
+ 
 
 ---
 
@@ -54,7 +55,7 @@ The application defines a **custom bridge network** to facilitate seamless commu
 
 Containers within the same network can interact using their **service names as hostnames**, eliminating the need for explicit IP configurations.  
 
-For example:
+For example:  
 - The backend (`yolo-backend`) can connect to MongoDB (`app-ip-mongo`) using the hostname `app-mongo`.  
 - The frontend (`yolo-client`) interacts with the backend (`yolo-backend`) without requiring hardcoded IPs.  
 
@@ -92,10 +93,34 @@ The playbook executes tasks **sequentially**, ensuring dependencies are properly
   roles:
     - system_config
     - docker_setup
-    - app_deployment
+    - frontend_setup
+    - backend_setup
+    - mongo_setup
 ```
 
-Each role follows a specific order of execution, ensuring a smooth provisioning process.  
+Originally, a **single role** (`app_deployment`) handled container setup inside the VM. While functional, this lacked modularity, making individual microservice management difficult.  
+
+To improve **maintainability, debugging efficiency, and scalability**, the deployment workflow was **refactored into distinct roles**:  
+
+- **`frontend_setup`** → Deploys the frontend container (`yolo-client`).  
+- **`backend_setup`** → Manages backend deployment (`yolo-backend`).  
+- **`mongo_setup`** → Ensures MongoDB (`app-ip-mongo`) is correctly configured and persistent.  
+
+---
+
+### **Ansible Modules Applied Within Each Role**  
+
+Each role uses specific **Ansible modules** to accomplish its tasks efficiently. The table below provides an overview of the modules used and their respective roles.
+
+| **Ansible Module**  | **Purpose**  | **Roles Applied In** |
+|---------------------|-------------|----------------------|
+| `apt`              | Installs necessary system packages | `system_config`, `docker_setup` |
+| `file`             | Ensures required directories exist | `system_config` |
+| `git`              | Clones the application repository | `system_config` |
+| `user`             | Manages user permissions (adds vagrant user to the Docker group) | `docker_setup` |
+| `systemd`          | Ensures services (like Docker) are started and enabled at boot | `docker_setup`, `system_config` |
+| `command`          | Runs shell commands (e.g., starting containers using `docker-compose`) | `frontend_setup`, `backend_setup`, `mongo_setup` |
+| `debug`            | Displays messages during execution for verification | `docker_setup` |
 
 ---
 
@@ -104,42 +129,34 @@ Each role follows a specific order of execution, ensuring a smooth provisioning 
 #### **1. `system_config`** (Runs First)  
 **Purpose:** Prepares the system environment by ensuring required packages are installed, managing users, and configuring essential dependencies.  
 
-**Ansible Modules Used:**  
-- `apt` → Installs necessary system packages  
-- `file` → Manages directory structure and permissions  
-
-**Why It Runs First:**  
-This role sets up the foundational system requirements, ensuring all subsequent installations and configurations operate without issues.  
+- Uses `apt` to install essential packages like Git and Curl.  
+- Uses `file` to create necessary directories for application deployment.  
+- Uses `git` to clone the application repository.  
 
 ---
 
 #### **2. `docker_setup`** (Runs After System Configuration)  
-**Purpose:** Installs and configures Docker, including setting up the required runtime environment.  
+**Purpose:** Installs and configures Docker to ensure a proper runtime environment.  
 
-**Ansible Modules Used:**  
-- `apt` → Installs Docker and Docker Compose  
-- `user` → Ensures the `vagrant` user has proper Docker permissions  
-- `service` → Ensures Docker is running and enabled at boot  
-
-**Why It Runs Second:**  
-Docker must be properly installed and configured before any application deployment, as all microservices rely on it for containerization.  
+- Uses `apt` to install Docker.  
+- Uses `systemd` to enable and start the Docker service.  
+- Uses `user` to add the `vagrant` user to the Docker group.  
+- Uses `debug` to confirm the installed Docker version.  
 
 ---
 
-#### **3. `app_deployment`** (Runs Last)  
-**Purpose:** Clones the application repository, installs dependencies, and runs the app containers.  
+#### **3. Refactored Application Deployment**  
+The previous **`app_deployment`** role was replaced with modular roles for **granular control over each service**.
 
-**Ansible Modules Used:**  
-- `git` → Clones the latest version of the app repository  
-- `file` → Ensures required directories exist  
-- `command` → Runs `docker-compose up` to start containers  
+- **`frontend_setup`** → Uses `command` to start the **frontend container (`yolo-client`)**.  
+- **`backend_setup`** → Uses `command` to start the **backend container (`yolo-backend`)**.  
+- **`mongo_setup`** → Uses `command` to start the **MongoDB container (`app-ip-mongo`)**.  
 
-**Why It Runs Last:**  
-The application requires a properly configured Docker runtime, so this role executes once Docker is fully installed and operational.  
+Each of these roles ensures that **service-specific provisioning is handled cleanly**, making debugging easier and reducing the risk of breaking dependencies across microservices.
 
 ---
 
-## **Deployment Testing & Debugging**  
+### **Deployment Testing & Debugging**  
 
 Several validation steps were executed to ensure deployment success:  
 - Confirmed all containers were running using `docker ps`  
