@@ -33,9 +33,13 @@ project-root/
 ├── ansible/                    # Ansible automation scripts
 │   ├── playbook.yml            # Defines provisioning tasks
 │   ├── roles/                  # Modular automation roles
-│   │   ├── system_config/       
-│   │   ├── docker_setup/        
-│   │   ├── app_deployment/      
+│   │   ├── system_config/       # Prepares environment and installs dependencies
+│   │   ├── docker_setup/        # Installs and configures Docker
+│   │   ├── frontend_setup/      # Deploys the frontend container
+│   │   ├── backend_setup/       # Deploys the backend container
+│   │   ├── mongo_setup/         # Deploys the MongoDB container
+│   │   ├── legacy/              # Contains the deprecated app_deployment role for reference
+│   │   │   ├── app_deployment/  # Previous deployment role (archived for historical reference)
 ├── vagrant/                    # Vagrant environment configuration
 │   ├── Vagrantfile              # Defines VM setup and automation triggers
 ├── explanation.md               # Project explanation (documentation)
