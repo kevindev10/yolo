@@ -41,6 +41,13 @@ app.use(upload.array());
 // Cors 
 app.use(cors());
 
+
+app.get('/', (req, res) => {
+    res.json({ message: "Backend is running!" });
+});
+
+
+
 // Use Route
 app.use('/api/products', productRoute)
 
