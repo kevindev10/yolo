@@ -1,11 +1,18 @@
+# ---------------------------------------------------------
+# feat: Add Kubernetes backend deployment manifest
+# 
+# - Define backend deployment with one replica for efficiency
+# - Set MongoDB connection string to reference Kubernetes service
+# - Configure resource limits to stay within Free Tier constraints
+# - Ensure proper container port exposure for backend services
+# ---------------------------------------------------------
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
-  labels:
-    app: backend
 spec:
-  replicas: 2
+  replicas: 1  # We’re keeping it minimal for Free Tier
   selector:
     matchLabels:
       app: backend
@@ -16,29 +23,16 @@ spec:
     spec:
       containers:
         - name: backend
-          image: brianbwire/brian-yolo-backend:v1.0.0
-          command: ["npm", "start"] 
+          image: kevindev1/yolo-backend:v1.0.5
           ports:
             - containerPort: 5000
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://mongo-service.default.svc.cluster.local/yolomy"
           resources:
             limits:
-              memory: "256Mi"
-              cpu: "500m"
+              cpu: "500m"  # Restrict to half a CPU core
+              memory: "512Mi"  # Keep memory usage within Free Tier
             requests:
-              memory: "128Mi"
               cpu: "250m"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-service
-spec:
-  type: LoadBalancer
-  selector:
-    app: backend
-  ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-      nodePort: 30100
-  
+              memory: "256Mi"
