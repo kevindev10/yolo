@@ -27,7 +27,7 @@ services:
 
   #Builds the backend Docker image and creates the backend microservice
   yolo-backend:
-    image: kevindev1/yolo-backend:v1.0.5
+    image: kevindev1/yolo-backend:v1.0.6
     build: ./backend
     container_name: yolo-backend
     stdin_open: true
