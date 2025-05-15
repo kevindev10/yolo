@@ -26,9 +26,9 @@ spec:
           image: kevindev1/yolo-backend:v1.0.6
           ports:
             - containerPort: 5000
-          env:
-            - name: MONGODB_URI
-              value: "mongodb://mongo-service.default.svc.cluster.local/yolomy"
+          envFrom:
+            - secretRef:
+                name: mongodb-secret  # Inject MongoDB URI securely
           resources:
             limits:
               cpu: "100m"  # Restrict to half a CPU core
