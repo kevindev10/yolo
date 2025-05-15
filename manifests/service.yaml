@@ -17,7 +17,7 @@ spec:
     - protocol: TCP
       port: 5000  # Cluster-internal port
       targetPort: 5000  # Matches container's port
-  type: ClusterIP  # Internal only—backend should not be exposed directly
+  type: LoadBalancer  # Allows external access to backend
 
 ---
 apiVersion: v1
