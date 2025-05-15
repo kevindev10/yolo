@@ -34,5 +34,5 @@ spec:
               cpu: "100m"  # Restrict to half a CPU core
               memory: "128Mi"  # Keep memory usage within Free Tier
             requests:
-              cpu: "250m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "128Mi"
