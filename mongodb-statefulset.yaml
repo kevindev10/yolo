@@ -1,0 +1,59 @@
+# ---------------------------------------------------------
+# feat: Add MongoDB StatefulSet for Kubernetes
+#
+# - Implements StatefulSet for stable pod identity
+# - Defines Persistent Volume for data persistence
+# - Ensures MongoDB service discovery via headless Service
+# - Optimized for Google Cloud Free Tier constraints
+# ---------------------------------------------------------
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  serviceName: "mongo-service"  # Headless Service allows MongoDB pods to have stable network identities
+  replicas: 1  # Keeping it minimal for Free Tier constraints
+
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:latest
+          ports:
+            - containerPort: 27017  # MongoDB listens on this port by default
+
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db  # This ensures MongoDB data is stored persistently across pod restarts
+
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]  # Ensures only one pod writes to the database at a time
+        resources:
+          requests:
+            storage: 5Gi  # 5Gi is enough for our current usage while staying within Free Tier limits
+
+# ---------------------------------------------------------
+# Why StatefulSet Instead of Deployment?
+# - StatefulSets provide stable pod names (mongodb-0, mongodb-1, etc.), which is important for databases.
+# - Regular Deployments give pods random names when restarted, breaking MongoDB connections.
+# - StatefulSets ensure ordered pod startup/shutdown, preventing database inconsistencies.
+#
+# Why Persistent Volume Claim (PVC)?
+# - Unlike ephemeral storage, PVC retains MongoDB data even if the pod restarts.
+# - This replaces Docker volumes in Kubernetes, ensuring long-term data persistence.
+# - Without a PVC, MongoDB would lose all stored data whenever it restarted.
+#
+# Storage Considerations:
+# - We request 5Gi of storage, which fits within Google Cloud Free Tier constraints.
+# - MongoDB's data directory `/data/db` is mapped to this volume, preventing data loss.
+# ---------------------------------------------------------
