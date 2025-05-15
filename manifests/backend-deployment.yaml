@@ -31,8 +31,8 @@ spec:
               value: "mongodb://mongo-service.default.svc.cluster.local/yolomy"
           resources:
             limits:
-              cpu: "500m"  # Restrict to half a CPU core
-              memory: "512Mi"  # Keep memory usage within Free Tier
+              cpu: "100m"  # Restrict to half a CPU core
+              memory: "128Mi"  # Keep memory usage within Free Tier
             requests:
               cpu: "250m"
               memory: "256Mi"
