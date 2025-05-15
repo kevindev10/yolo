@@ -1,0 +1,37 @@
+# ---------------------------------------------------------
+# feat: Add Kubernetes frontend deployment manifest
+# 
+# - Define frontend deployment with one replica for efficiency
+# - Expose frontend on port 3000
+# - Configure resource limits to stay within Free Tier constraints
+# ---------------------------------------------------------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1  # Free Tier-friendly
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: kevindev1/yolo-client:v1.0.8
+          ports:
+            - containerPort: 3000
+          env:
+            - name: HOST
+              value: "0.0.0.0"
+          resources:
+            limits:
+              cpu: "500m"  # Restrict to half a CPU core
+              memory: "512Mi"  # Keep memory usage optimized
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
