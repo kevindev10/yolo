@@ -48,8 +48,8 @@ The application is designed for **scalability, reliability, and fault tolerance*
 
 ### Clone the repository
 ```bash
-git clone https://github.com/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/kevindev10/yolo
+cd https://github.com/kevindev10/yolo
 ```
 
 ### Build and run the containers locally using Docker Compose
