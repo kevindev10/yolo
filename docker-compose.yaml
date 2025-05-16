@@ -12,7 +12,7 @@ services:
 
   #Builds the frontend Docker image and creates the frontend microservice
   yolo-client:
-    image:  kevindev1/yolo-client:v1.0.8
+    image:  kevindev1/yolo-client:v1.0.9
     build: ./client
     container_name: yolo-client
     stdin_open: true
