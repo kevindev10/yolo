@@ -1,9 +1,6 @@
+# **Microservice Web Application with Node.js, MongoDB, and Kubernetes**
 
-
-```markdown
-# **Microservice Web Application with Node.js, MongoDB, and Kubernetes**  
-
-## **Project Overview**  
+## **Project Overview**
 This project is a fully containerized **microservice web application** deployed on **Google Kubernetes Engine (GKE)**. It features:  
 - A **React-based frontend**  
 - A **Node.js Express backend**  
@@ -13,13 +10,13 @@ The application is designed for **scalability, reliability, and fault tolerance*
 
 ---
 
-## **Live Deployment on GKE**  
+## **Live Deployment on GKE**
 🔗 **Access the live application here:**  
-### 👉 [**GKE Live URL**](http://35.184.247.235:3000/)  
+### 👉 [**GKE Live URL**](http://35.184.247.235:3000/)
 
 ---
 
-## **Technology Stack**  
+## **Technology Stack**
 - 🖥️ **Frontend:** React (client-side UI)  
 - 🛠️ **Backend:** Node.js + Express (API services)  
 - 📦 **Database:** MongoDB (Persistent Data Store)  
@@ -29,47 +26,47 @@ The application is designed for **scalability, reliability, and fault tolerance*
 
 ---
 
-## **Kubernetes Deployment Strategy**  
+## **Kubernetes Deployment Strategy**
 
-### **1️⃣ Kubernetes Objects Used**  
-✔️ **Frontend & Backend:** Deployed as **Kubernetes Deployments** for **rolling updates, scalability, and high availability**.  
-✔️ **MongoDB:** Implemented using **StatefulSets** for **persistent storage and stable pod identity**.  
-✔️ **Networking:** Services configured to ensure **secure internal & external communication**.  
+### 1️⃣ Kubernetes Objects Used
+- ✔️ **Frontend & Backend:** Deployed as **Kubernetes Deployments** for **rolling updates, scalability, and high availability**.  
+- ✔️ **MongoDB:** Implemented using **StatefulSets** for **persistent storage and stable pod identity**.  
+- ✔️ **Networking:** Services configured to ensure **secure internal & external communication**.
 
-### **2️⃣ Exposing Services to Internet Traffic**  
-✔️ **Frontend & Backend:** `LoadBalancer` Services expose them externally with **public IP addresses**.  
-✔️ **MongoDB:** Configured as a **headless service** (`ClusterIP: None`), ensuring stability without exposing the database externally.  
+### 2️⃣ Exposing Services to Internet Traffic
+- ✔️ **Frontend & Backend:** `LoadBalancer` Services expose them externally with **public IP addresses**.  
+- ✔️ **MongoDB:** Configured as a **headless service** (`ClusterIP: None`), ensuring stability without exposing the database externally.
 
-### **3️⃣ Persistent Storage Implementation**  
-✔️ **MongoDB Data is stored in a Persistent Volume (PVC)**  
-✔️ Ensures that database contents **survive pod restarts and deletions**  
-✔️ Kubernetes dynamically reattaches the storage to new MongoDB pods  
+### 3️⃣ Persistent Storage Implementation
+- ✔️ **MongoDB Data is stored in a Persistent Volume (PVC)**
+- ✔️ Ensures that database contents **survive pod restarts and deletions**
+- ✔️ Kubernetes dynamically reattaches the storage to new MongoDB pods
 
 ---
 
-## **How to Deploy Locally**  
+## **How to Deploy Locally**
 
-### **Clone the repository**  
+### Clone the repository
 ```bash
 git clone https://github.com/YOUR_REPO.git
 cd YOUR_REPO
 ```
 
-### **Build and run the containers locally using Docker Compose**  
+### Build and run the containers locally using Docker Compose
 ```bash
 docker-compose up --build
 ```
 
 ---
 
-## **Contributors & Acknowledgments**  
+## **Contributors & Acknowledgments**
 - 👨‍💻 **Lead Developer:** Kevin  
 - 🎯 **Deployment successfully completed on Google Kubernetes Engine (GKE)**  
 
 ---
 
-## **Project Structure**  
-The folder hierarchy follows **clean architecture principles**, keeping services modular and maintainable:  
+## **Project Structure**
+The folder hierarchy follows **clean architecture principles**, keeping services modular and maintainable:
 
 ```plaintext
 📂 Project Root  
@@ -105,5 +102,3 @@ The folder hierarchy follows **clean architecture principles**, keeping services
 ```
 
 ---
-
-
