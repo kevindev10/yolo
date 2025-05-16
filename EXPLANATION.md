@@ -169,6 +169,45 @@ These checks reinforce deployment stability and minimize manual oversight.
 
 ---
 
+
+
+## IP 4 Orchestration
+
+### Choice of Kubernetes Objects for Deployment
+Deployments and StatefulSets were selected to ensure **reliability, scalability, and persistent storage** for the microservices.
+
+- **Backend & Frontend:** Deployed using **Kubernetes Deployments** to enable **rolling updates, self-healing mechanisms**, and efficient scaling.
+- **Database (MongoDB):** Implemented as a **StatefulSet** to provide **persistent storage and stable pod identity**, preventing database connection disruptions.
+
+Using Deployments guarantees fault tolerance for stateless services, while StatefulSets ensure consistency and durability for database management.
+
+### Use of StatefulSets for Storage Solutions
+MongoDB was deployed using **StatefulSets** instead of a standard Deployment for better stability.
+
+- **Stable network identities:** Ensures each MongoDB pod retains its hostname across restarts.
+- **Controlled pod startup/shutdown:** Prevents data corruption during scaling events.
+- **Persistent Volume attachment:** Allows MongoDB to persist data even if the pod is deleted or restarted.
+
+This method eliminates random pod name assignment on restart, preventing connection failures in database-dependent services.
+
+### Method Used to Expose Pods to Internet Traffic
+To balance **external accessibility with security**, the following exposure methods were applied:
+
+- **Frontend & Backend Services:** Exposed via `LoadBalancer` Services, assigning public IPs for external access.
+- **MongoDB Service:** Configured as a **ClusterIP (None) headless service** for stable internal networking without exposing the database externally.
+
+This design ensures secure communication between microservices while preventing unauthorized database access.
+
+### Use of Persistent Storage
+MongoDB utilizes a **Persistent Volume Claim (PVC)** to maintain database integrity:
+
+- **Mounted at `/data/db`**, storing all MongoDB data securely.
+- **Ensures long-term availability**, even if the database pod is removed or restarted.
+- **Automatic volume reattachment**, preventing data loss during redeployments.
+
+This setup guarantees that all products, cart contents, and user-related data remain accessible despite scaling events or service failures.
+
+
 ## **Git Workflow**  
 
 ```plaintext
