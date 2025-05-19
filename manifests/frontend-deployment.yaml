@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: kevindev1/yolo-client:v1.1.0
+          image: kevindev1/yolo-client:v1.1.1
           ports:
             - containerPort: 3000
           env:
