@@ -22,7 +22,7 @@ function AboutUs () {
                         designed and crafted from the heart by <br />
                         an amazing team of craftsmen and <br />
                         designers who understand what fashion <br />
-                        is.
+                        is.Kevin Ndolo
                     </p>
                 </div>
 

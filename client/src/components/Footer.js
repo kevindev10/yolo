@@ -61,7 +61,7 @@ function Footer () {
                         </div>
 
                         <div className="col-12">
-                            <p className="text-center copyrights">COPYRIGHT, YOLOMY INC</p>
+                            <p className="text-center copyrights">COPYRIGHT, KEVIN NDOLO</p>
                         </div>
                     </div>
                 </div>

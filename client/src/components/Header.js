@@ -17,7 +17,7 @@ function Header () {
                                     <div className="big-title text-center">Our Clothing, Your Comfort</div>
                                     <div className="title-desc text-center">
                                         We understand that you need to look good and feel great. <br/>
-                                        It all starts with what you are are wearing.                                 
+                                        It all starts with what you are are wearing.Kevin Ndolo                                 
                                     </div>
                                 </div>  
                             </div>
